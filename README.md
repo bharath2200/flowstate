@@ -52,32 +52,32 @@ FlowState/
 │
 ├── css/
 │   ├── components/
-│   │   ├── notes.css       # Sticky note pastel colors & dots
-│   │   ├── pomodoro.css    # Circular progress SVG & play dials
-│   │   ├── todo.css        # Checkbox scales & priority badges
-│   │   └── widgets.css     # Weather grids & quote refreshes
+│   │   ├── notes.css       
+│   │   ├── pomodoro.css   
+│   │   ├── todo.css       
+│   │   └── widgets.css    
 │   │
 │   ├── layouts/
-│   │   └── grid.css        # Multi-column grid & GitHub-style navbar
+│   │   └── grid.css       
 │   │
-│   └── main.css            # Resets, tokens, & sub-import rules
+│   └── main.css          
 │
 ├── js/
 │   ├── modules/
-│   │   ├── notes.js        # Color changers & note arrays
-│   │   ├── pomodoro.js     # Web Audio beeper & timer controls
-│   │   ├── quotes.js       # Refreshes & database lists
-│   │   ├── todo.js         # Checklists & priority filters
-│   │   └── weather.js      # Geocoding & Open-Meteo coordinates
+│   │   ├── notes.js       
+│   │   ├── pomodoro.js    
+│   │   ├── quotes.js      
+│   │   ├── todo.js       
+│   │   └── weather.js     
 │   │
 │   ├── utils/
-│   │   └── storage.js      # JSON local storage serializers
+│   │   └── storage.js     
 │   │
-│   └── app.js              # Loader & master coordinator
+│   └── app.js             
 │
-├── index.html              # Main HTML entrypoint
-├── README.md               # Documentation guide
-└── package.json            # npm metadata and live-server settings
+├── index.html              
+├── README.md             
+└── package.json           
 ```
 
 ---
