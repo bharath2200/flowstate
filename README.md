@@ -1,106 +1,66 @@
-# 🚀 FlowState — Developer Productivity Cockpit
+🚀 FlowState — Developer Productivity Dashboard
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Theme: GitHub Style](https://img.shields.io/badge/Theme-GitHub--Style-blue)](https://github.com)
-[![Logic: Vanilla ES6 Modules](https://img.shields.io/badge/Logic-Vanilla%20ES6%20Modules-brightgreen)](#)
+A modern and responsive productivity dashboard for developers inspired by GitHub’s clean UI design. Built using pure HTML, CSS, and Vanilla JavaScript with modular ES6 architecture.
 
-A beautiful, functional, and highly polished developer cockpit inspired by **GitHub's layout aesthetics**. Styled with pure Vanilla CSS, the board contains zero external UI runtime dependencies and uses vanilla JavaScript ES6 modular structures to separate component operations.
-
----
-
-## 🎨 Design Theme Philosophy
-FlowState implements a premium, adaptive grid interface designed specifically for software engineers. It supports:
-- **GitHub Dark (`github-dark`)**: Classic deep slate tones (`#0d1117` / `#161b22`) and outlining borders (`#30363d`).
-- **GitHub Light (`github-light`)**: High contrast light slate palettes (`#f6f8fa` / `#ffffff`) preserving GitHub's sleek responsive details.
-- **Theme Caching**: Active settings automatically persist across page sessions via browser `localStorage`.
-
----
-
-## ⚡ Core Features
-
-### 1. 📋 Backlog Sprint Planner (To-Do)
-- Fast task entries with specific priority categorization labels (`Work`, `Personal`, `Urgent`).
-- Status counters calculating active backlog percentages and completed tasks.
-- Interactive, responsive checklist ticks utilizing clean CSS transitions.
-- Automatic browser state syncs using local data pools.
-
-### 2. ⏱️ Pomodoro Focus Station
-- Smooth circular countdown graph built using customizable **SVG circle dashoffset** values.
-- Quick mode selectors toggling between `Productive Sessions` (25m), `Short Breaks` (5m), and `Extended Breaks` (15m).
-- Bypasses missing local asset audio errors by synthesizing a bell tone on completion using the browser's **Web Audio API**.
-
-### 3. 📝 Scratchpad Sticky Notes
-- Multi-colored scratch notes layout modeled after classic developer kanbans.
-- Five distinct style classes (`note-blue`, `note-purple`, `note-green`, `note-yellow`, `note-red`) matching dark and light contrast.
-- Fully editable text fields dynamically triggering save routines on user input.
-
-### 4. 🌤️ Geolocation Weather Widget
-- Connects to **Open-Meteo's Key-less public weather endpoints** to query live meteorological statistics client-side.
-- Uses the **HTML5 Geolocation API** to fetch high-precision local coordinates automatically.
-- Fallback search box that resolves typed city queries to precise latitudes and longitudes using open geocoding.
-- Translates WMO weather condition codes into Font Awesome meteorology symbols.
-
-### 5. 💬 Daily Coding Quotes
-- A database of highly engaging developer quotes featuring Linus Torvalds, Martin Fowler, Steve Gates, etc.
-- Soft text transitions applying clean fade-outs when clicking refresh actions.
-
----
-
-## 📂 Project Structure Map
-```
+✨ Features
+📋 Task Manager
+Add, complete, and delete tasks
+Task categories and progress tracking
+LocalStorage support
+⏱️ Pomodoro Timer
+25/5 focus timer
+SVG circular progress animation
+Browser sound notification
+📝 Sticky Notes
+Create colorful editable notes
+Auto-save notes locally
+🌤️ Weather Widget
+Live weather using Open-Meteo API
+Automatic location detection
+City search support
+💬 Daily Developer Quotes
+Random motivational coding quotes
+Smooth text transition effects
+🌙 Theme Support
+GitHub Dark Mode
+GitHub Light Mode
+Theme preference saved automatically
+🛠️ Tech Stack
+HTML5
+CSS3
+Vanilla JavaScript (ES6 Modules)
+LocalStorage
+Open-Meteo API
+Font Awesome
+📂 Project Structure
 FlowState/
 │
 ├── css/
-│   ├── components/
-│   │   ├── notes.css       
-│   │   ├── pomodoro.css   
-│   │   ├── todo.css       
-│   │   └── widgets.css    
-│   │
-│   ├── layouts/
-│   │   └── grid.css       
-│   │
-│   └── main.css          
-│
 ├── js/
 │   ├── modules/
-│   │   ├── notes.js       
-│   │   ├── pomodoro.js    
-│   │   ├── quotes.js      
-│   │   ├── todo.js       
-│   │   └── weather.js     
-│   │
-│   ├── utils/
-│   │   └── storage.js     
-│   │
-│   └── app.js             
+│   └── utils/
 │
-├── index.html              
-├── README.md             
-└── package.json           
-```
+├── index.html
+├── README.md
+└── package.json
+⚡ Getting Started
+Run Locally
+npm install
+npm run start
 
----
+Or simply open:
 
-## 🛠️ Quick Setup Guide
+index.html
 
-### Method A: Zero Install (Direct Launch)
-Double-click `index.html` directly to load it inside any modern web browser. **Note**: If you want to use the Geocoding Weather search, standard modern security sandbox protocols may restrict cross-origin requests from `file://` URIs. We highly recommend using a local development server.
+in your browser.
 
-### Method B: Development Server (Recommended)
-1. Ensure **Node.js** is installed on your local computer.
-2. Open your terminal in the `FlowState` folder.
-3. Install standard hot-reloading web servers:
-   ```bash
-   npm install
-   ```
-4. Start the server using:
-   ```bash
-   npm run start
-   ```
-   *(Uses `live-server` to automatically spin up a development host at `http://127.0.0.1:8080` with automatic browser refreshes on file edits!)*
+🎨 Design Inspiration
 
----
+Inspired by:
 
-## 📄 License
-This project is licensed under the MIT License - see the [MIT License](LICENSE) docs for details.
+GitHub
+Notion
+Linear
+📄 License
+
+Licensed under the MIT License.
