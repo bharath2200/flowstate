@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="github-dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlowState — Developer Productivity Cockpit</title>
+    <meta name="description" content="A premium, GitHub-inspired productivity dashboard for developers featuring Pomodoro timers, sticky notes, Weather telemetry, and sprint task backlogs.">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Combined Stylesheet -->
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+
+    <!-- MASTER APP SHELL LAYOUT -->
+    <div class="app-layout">
+
+        <!-- RESPONSIVE LEFT SIDEBAR -->
+        <aside class="dashboard-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fa-solid fa-laptop-code"></i>
+                    <span>FlowState</span>
+                </div>
+                <button class="sidebar-collapse-btn" id="sidebar-collapse-btn" aria-label="Collapse Navigation menu">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+
+            <!-- Sidebar Navigation Menu Routers -->
+            <ul class="sidebar-menu">
+                <li class="sidebar-menu-item active" data-tab="home">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Dashboard Home</span>
+                </li>
+                <li class="sidebar-menu-item" data-tab="todo">
+                    <i class="fa-solid fa-list-check"></i>
+                    <span>Sprint Backlog</span>
+                </li>
+                <li class="sidebar-menu-item" data-tab="habits">
+                    <i class="fa-solid fa-fire"></i>
+                    <span>Habit Tracker</span>
+                </li>
+                <li class="sidebar-menu-item" data-tab="analytics">
+                    <i class="fa-solid fa-chart-simple"></i>
+                    <span>Productivity Analytics</span>
+                </li>
+                <li class="sidebar-menu-item" data-tab="pomodoro">
+                    <i class="fa-solid fa-stopwatch"></i>
+                    <span>Focus Clock</span>
+                </li>
+            </ul>
+
+            <!-- Sidebar Developer Profile -->
+            <div class="sidebar-footer">
+                <div class="sidebar-profile">
+                    <div class="sidebar-avatar">DB</div>
+                    <div style="display: flex; flex-direction: column;">
+                        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-primary);">Developer Guest</span>
+                        <span style="font-size: 0.65rem; color: var(--text-secondary);">Software Engineer</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN VIEWPORT CONTAINER -->
+        <main class="main-content">
+
+            <!-- Top Header Action Navigation Bar -->
+            <header class="main-header">
+                <div class="header-greeting-box">
+                    <h2 id="dashboard-greeting">Good morning, Developer! 🌅</h2>
+                    <span id="dashboard-active-date" style="font-size: 0.8rem; color: var(--text-secondary);">Monday, May 18, 2026</span>
+                </div>
+
+                <div class="header-actions-box">
+                    <!-- Command Palette search trigger -->
+                    <button class="palette-trigger-btn" id="palette-open-btn" aria-label="Open Command Palette" onclick="document.dispatchEvent(new KeyboardEvent('keydown', {'key':'k', 'ctrlKey':true}))">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span>Search commands...</span>
+                        <span class="kbd-badge">Ctrl + K</span>
+                    </button>
+
+                    <!-- Theme toggle button -->
+                    <button class="theme-btn" id="theme-toggle-btn" aria-label="Toggle GitHub theme mode">
+                        <i class="fa-solid fa-sun" id="theme-toggle-icon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- PANEL 1: DASHBOARD HOME (Active by default) -->
+            <div class="dashboard-panel active" id="panel-home">
+                
+                <!-- Quick Telemetry Stats Row -->
+                <div class="stats-summary-row">
+                    <div class="stat-metric-card">
+                        <div class="stat-icon-wrapper icon-blue">
+                            <i class="fa-solid fa-list-check"></i>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-val" id="home-backlog-tasks">--</span>
+                            <span class="stat-label">Active Tasks</span>
+                        </div>
+                    </div>
+                    <div class="stat-metric-card">
+                        <div class="stat-icon-wrapper icon-red">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-val" id="home-max-streak">--</span>
+                            <span class="stat-label">Max Habits Streak</span>
+                        </div>
+                    </div>
+                    <div class="stat-metric-card">
+                        <div class="stat-icon-wrapper icon-green">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-val" id="home-focus-sessions">--</span>
+                            <span class="stat-label">Today's Focus Slots</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sub-grids featuring Weather & Quote in left column, Habits dashboard summary in right -->
+                <div class="home-subgrid">
+                    
+                    <!-- Left: Weather + Quotes -->
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <!-- Weather Widget -->
+                        <div class="card">
+                            <div class="weather-wrapper">
+                                <div class="weather-header">
+                                    <span class="weather-location">
+                                        <i class="fa-solid fa-location-dot"></i>
+                                        <span id="weather-city-name">San Francisco, US</span>
+                                    </span>
+                                </div>
+                                <div class="weather-main">
+                                    <div class="weather-large-icon">
+                                        <i class="fa-solid fa-cloud-sun" id="weather-icon" style="color: #cbd5e1;"></i>
+                                    </div>
+                                    <div class="weather-temp-container">
+                                        <span class="weather-temp" id="weather-temp">--°C</span>
+                                        <span class="weather-status" id="weather-status">Loading metrics...</span>
+                                    </div>
+                                </div>
+                                <div class="weather-search-group">
+                                    <input type="text" id="weather-search-input" class="weather-input" placeholder="Search city...">
+                                    <button id="weather-search-btn" class="weather-btn" aria-label="Search city weather">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quote Card -->
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fa-solid fa-quote-left"></i>
+                                    <span>Wisdom</span>
+                                </div>
+                                <button class="quote-reload-btn" id="quote-refresh-btn" aria-label="Load a new random developer quote">
+                                    <i class="fa-solid fa-rotate"></i>
+                                </button>
+                            </div>
+                            <div class="quote-wrapper">
+                                <p class="quote-body" id="quote-text">“Talk is cheap. Show me the code.”</p>
+                                <span class="quote-author" id="quote-author">— Linus Torvalds</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right: Quick Habits checklist overview -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-fire"></i>
+                                <span>Active Habits Overview</span>
+                            </div>
+                        </div>
+                        <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.6;">
+                            <p>Consistency builds competence. Tick off your daily habits inside the <strong>Habit Tracker</strong> menu panel to calculate current calendar streaks and update Chart.js metrics.</p>
+                            <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+                                <div style="display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-canvas); padding: 0.75rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+                                    <span style="font-weight: 600;"><i class="fa-solid fa-code" style="color: var(--accent-blue); margin-right: 0.5rem;"></i> Coding Habit</span>
+                                    <span style="color: var(--text-muted);">Checked daily</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; background-color: var(--bg-canvas); padding: 0.75rem; border-radius: var(--border-radius); border: 1px solid var(--border-color);">
+                                    <span style="font-weight: 600;"><i class="fa-solid fa-dumbbell" style="color: var(--accent-red); margin-right: 0.5rem;"></i> Fitness Routine</span>
+                                    <span style="color: var(--text-muted);">Checked daily</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PANEL 2: SPRINT BACKLOG (Tasks & Scratch Notes) -->
+            <div class="dashboard-panel" id="panel-todo">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+                    
+                    <!-- Backlog Tasks Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-list-check"></i>
+                                <span>Sprint Backlog</span>
+                            </div>
+                        </div>
+                        <div class="todo-input-group">
+                            <input type="text" id="todo-input" class="todo-text-input" placeholder="Add sprint task...">
+                            <select id="todo-cat-select" class="todo-select" aria-label="Task Priority Category">
+                                <option value="work">Work</option>
+                                <option value="personal">Personal</option>
+                                <option value="urgent">Urgent</option>
+                            </select>
+                            <button id="todo-add-btn" class="todo-btn-add" aria-label="Add task item">
+                                <i class="fa-solid fa-plus"></i>
+                                <span>Add</span>
+                            </button>
+                        </div>
+                        <ul class="todo-list" id="todo-list-box"></ul>
+                        <div class="todo-stats" id="todo-stats-text">0 active tasks remaining (0 total)</div>
+                    </div>
+
+                    <!-- Scratch Notes Card -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-note-sticky"></i>
+                                <span>Developer Scratch Notes</span>
+                            </div>
+                            <button class="todo-btn-add" id="notes-add-btn" style="padding: 0.3rem 0.6rem; font-size: 0.75rem; border-radius: 6px;">
+                                <i class="fa-solid fa-plus"></i> New Note
+                            </button>
+                        </div>
+                        <div class="notes-grid" id="notes-grid"></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- PANEL 3: HABIT TRACKER BOARD -->
+            <div class="dashboard-panel" id="panel-habits">
+                <div class="card" style="padding: 1.5rem;">
+                    <div class="card-header" style="margin-bottom: 1.5rem;">
+                        <div class="card-title">
+                            <i class="fa-solid fa-repeat"></i>
+                            <span>Weekly Habits Board</span>
+                        </div>
+                    </div>
+                    <div class="habits-grid" id="habits-grid-box"></div>
+                </div>
+            </div>
+
+            <!-- PANEL 4: PRODUCTIVITY ANALYTICS -->
+            <div class="dashboard-panel" id="panel-analytics">
+                <div class="analytics-grid">
+                    <!-- completed tasks chart -->
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-chart-bar"></i>
+                                <span>Sprint Completion (Tasks Completed)</span>
+                            </div>
+                        </div>
+                        <div class="chart-container-box">
+                            <canvas id="analytics-tasks-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Focus Hours completed -->
+                    <div class="card chart-card">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-chart-line"></i>
+                                <span>Deep Focus Chronology (Hours Focused)</span>
+                            </div>
+                        </div>
+                        <div class="chart-container-box">
+                            <canvas id="analytics-hours-chart"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- Habits streak Doughnut -->
+                    <div class="card chart-card" style="grid-column: 1 / -1; height: 380px;">
+                        <div class="card-header">
+                            <div class="card-title">
+                                <i class="fa-solid fa-chart-pie"></i>
+                                <span>Weekly Habits Completion Ratio (%)</span>
+                            </div>
+                        </div>
+                        <div class="chart-container-box" style="height: 300px;">
+                            <canvas id="analytics-habits-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PANEL 5: POMODORO CLOCK FOCUS STATION -->
+            <div class="dashboard-panel" id="panel-pomodoro">
+                <div class="card" style="max-width: 600px; margin: 0 auto; width: 100%;">
+                    <div class="card-header">
+                        <div class="card-title">
+                            <i class="fa-solid fa-stopwatch"></i>
+                            <span>Pomodoro Focus Station</span>
+                        </div>
+                    </div>
+                    
+                    <div class="pomodoro-wrapper">
+                        <!-- Mode Selector Pill -->
+                        <div class="timer-presets">
+                            <button class="preset-btn active" id="preset-work-btn">Work (25m)</button>
+                            <button class="preset-btn" id="preset-short-btn">Short Break (5m)</button>
+                            <button class="preset-btn" id="preset-long-btn">Long Break (15m)</button>
+                        </div>
+
+                        <!-- Progress SVG Timer Circular Gauge -->
+                        <div class="timer-circular-gauge">
+                            <svg class="timer-svg" viewBox="0 0 120 120">
+                                <circle class="timer-track" cx="60" cy="60" r="50"></circle>
+                                <circle class="timer-fill" id="timer-progress-fill" cx="60" cy="60" r="50"></circle>
+                            </svg>
+                            <div class="timer-details">
+                                <span class="timer-clock" id="timer-time-display">25:00</span>
+                                <span class="timer-subtitle" id="timer-label-display">Productive Session</span>
+                            </div>
+                        </div>
+
+                        <!-- Play / Pause Controls -->
+                        <div class="timer-controls">
+                            <button class="timer-ctrl-btn" id="timer-play-btn" aria-label="Start or Pause Timer">
+                                <i class="fa-solid fa-play" id="timer-play-icon"></i>
+                            </button>
+                            <button class="timer-ctrl-btn" id="timer-reset-btn" aria-label="Reset Timer countdown">
+                                <i class="fa-solid fa-arrow-rotate-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- GLASSMORPHIC COMMAND PALETTE OVERLAY (CTRL + K) -->
+    <div class="palette-overlay" id="palette-overlay">
+        <div class="palette-dialog">
+            <div class="palette-search-wrapper">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" id="palette-input" class="palette-search-input" placeholder="Type a command to run..." autocomplete="off">
+            </div>
+            <div class="palette-results-box" id="palette-results">
+                <!-- Autocomplete loaded dynamically via palette.js -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Master Coordination Module script -->
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>

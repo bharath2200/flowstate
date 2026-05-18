@@ -1,0 +1,281 @@
+/* 
+ * FlowState — Core Auxiliary Widgets (Weather, Quotes, Habits, Analytics)
+ */
+
+/* ==========================================
+   WEATHER INTERACTIVE WIDGET
+   ========================================== */
+.weather-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 0.5rem 0;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weather-main {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.weather-large-icon {
+    font-size: 3rem;
+    line-height: 1;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15));
+}
+
+.weather-temp-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.weather-temp {
+    font-family: var(--font-header);
+    font-size: 2.75rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--text-primary);
+}
+
+.weather-status {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.weather-location {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.weather-location i {
+    color: var(--accent-red);
+}
+
+/* Weather Search Input */
+.weather-search-group {
+    display: flex;
+    gap: 0.35rem;
+    margin-top: 0.25rem;
+}
+
+.weather-input {
+    flex-grow: 1;
+    background-color: var(--bg-canvas);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 0.4rem 0.6rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    outline: none;
+    transition: var(--transition);
+}
+
+.weather-input:focus {
+    border-color: var(--accent-green);
+}
+
+.weather-btn {
+    width: 32px;
+    height: 32px;
+    background-color: var(--bg-canvas);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.weather-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--border-color-hover);
+}
+
+
+/* ==========================================
+   DAILY PRODUCTIVITY QUOTES
+   ========================================== */
+.quote-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.25rem 0;
+}
+
+.quote-body {
+    font-size: 0.85rem;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    transition: opacity 0.3s ease;
+}
+
+.quote-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quote-author {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--accent-blue);
+    transition: opacity 0.3s ease;
+}
+
+.quote-reload-btn {
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.85rem;
+    padding: 0.25rem;
+    border-radius: 4px;
+    transition: var(--transition);
+}
+
+.quote-reload-btn:hover {
+    color: var(--text-primary);
+    background-color: var(--border-color);
+}
+
+
+/* ==========================================
+   HABIT TRACKER COMPONENT
+   ========================================== */
+.habits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.habit-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
+    padding: 1.25rem;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    transition: var(--transition);
+}
+
+.habit-card:hover {
+    transform: translateY(-2px);
+    border-color: var(--border-color-hover);
+}
+
+/* Color border branding indicators */
+.habit-card.border-blue { border-left: 4px solid var(--accent-blue); }
+.habit-card.border-red { border-left: 4px solid var(--accent-red); }
+.habit-card.border-purple { border-left: 4px solid var(--accent-purple); }
+.habit-card.border-green { border-left: 4px solid var(--accent-green); }
+
+.habit-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.habit-icon-box {
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.habit-icon-box.tag-coding { background-color: rgba(88, 166, 255, 0.1); color: var(--accent-blue); }
+.habit-icon-box.tag-gym { background-color: rgba(248, 81, 73, 0.1); color: var(--accent-red); }
+.habit-icon-box.tag-study { background-color: rgba(188, 140, 255, 0.1); color: var(--accent-purple); }
+.habit-icon-box.tag-reading { background-color: rgba(46, 164, 79, 0.1); color: var(--accent-green); }
+
+.habit-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+/* Streak Indicator Badges */
+.habit-streak-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 20px;
+}
+
+.streak-blue { background-color: rgba(88, 166, 255, 0.08); color: var(--accent-blue); }
+.streak-red { background-color: rgba(248, 81, 73, 0.08); color: var(--accent-red); }
+.streak-purple { background-color: rgba(188, 140, 255, 0.08); color: var(--accent-purple); }
+.streak-green { background-color: rgba(46, 164, 79, 0.08); color: var(--accent-green); }
+
+/* Weekly Checklist Row grids */
+.habit-days-row {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.35rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+}
+
+.habit-day-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.habit-day-label {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+
+/* ==========================================
+   PRODUCTIVITY ANALYTICS GRAPHS
+   ========================================== */
+.analytics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.chart-card {
+    height: 320px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.chart-container-box {
+    position: relative;
+    flex-grow: 1;
+    height: 240px;
+    width: 100%;
+}
+
+@media (max-width: 992px) {
+    .analytics-grid {
+        grid-template-columns: 1fr;
+    }
+}

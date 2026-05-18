@@ -1,0 +1,25 @@
+{
+  "name": "flowstate",
+  "version": "1.0.0",
+  "description": "🚀 FlowState — Premium Developer Productivity Dashboard",
+  "main": "js/app.js",
+  "scripts": {
+    "start": "npx -y live-server"
+  },
+  "keywords": [
+    "productivity",
+    "dashboard",
+    "developer",
+    "todo",
+    "pomodoro",
+    "notes",
+    "weather",
+    "github"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

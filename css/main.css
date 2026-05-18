@@ -1,0 +1,109 @@
+/* 
+ * FlowState — Master CSS Coordinator
+ * Styled with authentic GitHub-inspired aesthetic tokens
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap');
+@import url('layouts/grid.css');
+@import url('components/todo.css');
+@import url('components/pomodoro.css');
+@import url('components/notes.css');
+@import url('components/widgets.css');
+
+/* CSS VARIABLES FOR THEMES */
+:root, [data-theme="github-dark"] {
+    /* Fonts */
+    --font-header: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Theme Variables - GitHub Dark Mode */
+    --bg-canvas: #0d1117;
+    --bg-card: #161b22;
+    --bg-card-hover: #1f242c;
+    --bg-overlay: rgba(22, 27, 34, 0.8);
+    --border-color: #30363d;
+    --border-color-hover: #484f58;
+    
+    --text-primary: #c9d1d9;
+    --text-secondary: #8b949e;
+    --text-muted: #57606a;
+    
+    --accent-green: #2ea44f;
+    --accent-green-hover: #3fb950;
+    --accent-blue: #58a6ff;
+    --accent-blue-hover: #79c0ff;
+    --accent-red: #f85149;
+    --accent-purple: #bc8cff;
+    --accent-orange: #f0883e;
+    --accent-yellow: #f2cc60;
+
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 8px; /* Classic GitHub angular rounding */
+}
+
+[data-theme="github-light"] {
+    /* Theme Variables - GitHub Light Mode */
+    --bg-canvas: #f6f8fa;
+    --bg-card: #ffffff;
+    --bg-card-hover: #fcfcfc;
+    --bg-overlay: rgba(255, 255, 255, 0.8);
+    --border-color: #d0d7de;
+    --border-color-hover: #8c959f;
+    
+    --text-primary: #24292f;
+    --text-secondary: #57606a;
+    --text-muted: #8c959f;
+    
+    --accent-green: #2da44e;
+    --accent-green-hover: #2c974b;
+    --accent-blue: #0969da;
+    --accent-blue-hover: #0860ca;
+    --accent-red: #cf222e;
+    --accent-purple: #8250df;
+    --accent-orange: #bc4c00;
+    --accent-yellow: #bf8700;
+
+    --card-shadow: 0 4px 12px rgba(140, 149, 159, 0.12);
+}
+
+/* Global Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    line-height: 1.5;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-header);
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-canvas);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
